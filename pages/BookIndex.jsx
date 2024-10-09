@@ -1,33 +1,44 @@
 import { booksService } from "../services/book.service.js"
-
+import { BooksList } from "../cmps/BookList.jsx"
 
 const { useState, useEffect} = React
 
 export function OnLineBooks() {
     
-    const [Books, setBooks] = useState([])
+    const [books, setBooks] = useState([])
+
     useEffect(()=>{
         loadBooks()
 
     },[])
 
     function loadBooks() {
-        Bookservice.query().then(Books => setBooks(Books))
+        booksService.query().then(books => setBooks(books)).catch(err=>{
+            console.log('err',err)
+        })
     }
       
-    if(!Books) return
+    function onRemoveBook(BookId) {
+        booksService.remove(BookId)
+            .then(() => {
+                setCars(books =>
+                    books.filter(book => book.id !== BookId)
+                )
+            })
+            .catch(err => {
+                console.log('Problems removing book:', err)
+            })
+    }
+
+    function onSelectBookId(carId) {
+        setSelectedBooId(carId)
+    }
+
+    if(!books) return
     return (
-        <section className="Books-table">
+        <section className="books-index">
             <h2>Books on-line</h2>
-            <table >
-            {Books.map(animal=>(
-                <tbody>
-                <tr key={animal.id}>
-                    <td >{animal.type}</td>
-                    <td >{animal.count}</td>
-                    <td ><a href={`https://www.google.com/search?q= ${animal.type}`}>{animal.type}</a></td>
-                </tr></tbody>))}
-            </table>
+            <BooksList onSelectBookId={onSelectBookId} onRemoveBook={onRemoveBook} books={books}/>
         </section>
     )
 }
