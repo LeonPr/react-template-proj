@@ -8,17 +8,28 @@ export const booksService = {
     query,
     get,
     remove,
-    save
+    save,
+    getDefaultFilter
 }
 
 
 function query(filterBy = {}) {
     return storageService.query(BOOKS_KEY)
         .then(book => {
-            if (filterBy.txt) {
-                const regex = new RegExp(filterBy.txt, 'i')
-                book = book.filter(book => regex.test(book.type))
+            if (filterBy.title) {
+                const regex = new RegExp(filterBy.title, 'i')
+                book = book.filter(book => regex.test(book.title))
             }
+            if (filterBy.description) {
+                const regex = new RegExp(filterBy.description, 'i')
+                book = book.filter(book => regex.test(book.description))
+            }
+            if (filterBy.amount) {
+                book = book.filter(book =>  book.listPrice.amount >= filterBy.amount)
+            }        
+            if (filterBy.isOnSale) {
+                book = book.filter(book =>  book.listPrice.isOnSale )
+            }        
             return book
         })
 }
@@ -39,6 +50,9 @@ function save(book) {
     }
 }
 
+function getDefaultFilter() {
+    return { title: '', description: '' ,amount:'',isOnSale:''}
+}
 
 
 function _createBooks() {

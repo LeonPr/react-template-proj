@@ -2,7 +2,7 @@ import { booksService } from "../services/book.service.js"
 
 const { useEffect, useState } = React
 
-export function CarDetails({ bookId, onBack }) {
+export function BookDetails({ bookId, onBack }) {
 
     const [book, setBook] = useState(null)
 
@@ -21,7 +21,7 @@ export function CarDetails({ bookId, onBack }) {
         <section className="car-details">
             <h1>Title: {title}</h1>
             <h1>Price: {listPrice.amount} <span>{listPrice.currencyCode}</span></h1>
-            <h1>{listPrice.isOnSale ? OnSale : ''}</h1>
+            <h1>{listPrice.isOnSale ? 'OnSale' : ''}</h1>
             <p>{description}</p>
             <img src={`../assets/img/${thumbnail}`} alt="Book Image" />
             <button onClick={onBack}>Back</button>

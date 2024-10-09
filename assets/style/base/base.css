@@ -43,3 +43,6 @@ object {
 .debug * {
   outline: 1px solid gold
 }
+label,input{
+  margin-right: 10px;
+}
