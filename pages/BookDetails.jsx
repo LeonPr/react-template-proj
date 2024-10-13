@@ -16,15 +16,25 @@ export function BookDetails({ bookId, onBack }) {
 
     if (!book) return <div>Loading...</div>
 
-    const { title, listPrice,description,thumbnail } = book
+    const { title, listPrice,description,thumbnail ,pageCount,publishedDate} = book
     return (
         <section className="car-details">
             <h1>Title: {title}</h1>
             <h1>Price: {listPrice.amount} <span>{listPrice.currencyCode}</span></h1>
             <h1>{listPrice.isOnSale ? 'OnSale' : ''}</h1>
             <p>{description}</p>
+            <h3>Book Lenth : { readingType(pageCount) }</h3>
             <img src={`../assets/img/${thumbnail}`} alt="Book Image" />
             <button onClick={onBack}>Back</button>
         </section>
     )
+}
+function readingType(pageCount){
+    if(pageCount<100){
+        return 'Light Reading'
+    }else if(pageCount>500){
+        return 'Serious Reading'
+    }else{
+        return 'Descent Reading'
+    }
 }
