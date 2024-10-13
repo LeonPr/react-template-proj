@@ -1,3 +1,5 @@
+const { Link } = ReactRouterDOM
+
 import { booksService } from "../services/book.service.js"
 import { BooksList } from "../cmps/BookList.jsx"
 import { BookDetails } from "./BookDetails.jsx"
@@ -47,13 +49,8 @@ export function OnLineBooks() {
     return (
         <section className="books-index">
             <h2>Books on-line</h2>
-            {!selectedBookId ?
-                <React.Fragment>
-                    <BookFilter onSetFilter={onSetFilter} filterBy={filterBy} />
-                    <BooksList onSelectBookId={onSelectBookId} onRemoveBook={onRemoveBook} books={books} />
-                </React.Fragment>
-                : <BookDetails onBack={() => setSelectedBookId(null)} bookId={selectedBookId} />
-            }
+            <BookFilter onSetFilter={onSetFilter} filterBy={filterBy} />
+            <BooksList onSelectBookId={onSelectBookId} onRemoveBook={onRemoveBook} books={books} />
         </section>
     )
 }

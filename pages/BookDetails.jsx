@@ -1,4 +1,6 @@
 import { booksService } from "../services/book.service.js"
+import { LongTxt } from "../cmps/LongTxt.jsx"
+
 
 const { useEffect, useState } = React
 
@@ -18,15 +20,16 @@ export function BookDetails({ bookId, onBack }) {
 
     const { title, listPrice,description,thumbnail ,pageCount,publishedDate} = book
     return (
-        <section className="car-details">
+        <section className="books-details">
             <h1>Title: {title}</h1>
             <h1>Price: {listPrice.amount} <span>{listPrice.currencyCode}</span></h1>
             <h1>{listPrice.isOnSale ? 'OnSale' : ''}</h1>
-            <p>{description}</p>
+            <LongTxt txt={description}/>
             <h3>Book Lenth : { readingType(pageCount) }</h3>
-            <img src={`../assets/img/${thumbnail}`} alt="Book Image" />
+            <img src={`${thumbnail}`} alt="Book Image" />
             <button onClick={onBack}>Back</button>
         </section>
+       
     )
 }
 function readingType(pageCount){

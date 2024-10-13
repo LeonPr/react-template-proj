@@ -1,4 +1,3 @@
-import { UserPreview } from '../cmps/UserPreview.jsx'
 import { OnLineBooks } from './BookIndex.jsx'
 export function Home() {
     return (

@@ -1,4 +1,5 @@
 import { BookPreview} from "./BookPreview.jsx"
+import { BookEdit } from "../pages/BookEdit.jsx"
 
 export function BooksList({ books, onRemoveBook, onSelectBookId }){
 
